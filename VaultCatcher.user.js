@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Vault Catcher
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Watches for mistakes when giving members money from faction vault, and blocks requests that are over the user's total money
 // @author       Lazerpent [2112641]
 // @license      GNU GPLv3
@@ -82,6 +82,17 @@ function run() {
     const balance = getBankBalance();
     if (isNaN(balance)) {
       error(4);
+      return;
+    }
+
+    const addMoney = document.getElementById('add-to-balance-money');
+    if (!addMoney) {
+      error(6);
+      return;
+    }
+
+    if (addMoney.checked) {
+      newBtn.click();
       return;
     }
 
