@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         Vault Catcher
-// @namespace    http://tampermonkey.net/
-// @version      1.1
+// @namespace    https://lzpt.io/
+// @version      1.2
 // @description  Watches for mistakes when giving members money from faction vault, and blocks requests that are over the user's total money
 // @author       Lazerpent [2112641]
+// @updateURL    https://raw.githubusercontent.com/Lazerpent/VaultCatcher/master/VaultCatcher.user.js
 // @license      GNU GPLv3
 // @match        https://www.torn.com/factions.php*
 // ==/UserScript==
@@ -162,7 +163,14 @@ function getBankBalance() {
     if (nameWrapper.children.length === 0) {
       continue;
     }
-    if (nameWrapper.children[0].getAttribute('title') === username) {
+    let match = nameWrapper.children[0].getAttribute('title') === username;
+    if (!match) {
+      if (nameWrapper.children[0].children.length === 0) {
+        continue;
+      }
+      match = nameWrapper.children[0].children[0].getAttribute('title') === username;
+    }
+    if (match) {
       const amount = data.getElementsByClassName('amount')[0];
       if (!amount) {
         return 0;
