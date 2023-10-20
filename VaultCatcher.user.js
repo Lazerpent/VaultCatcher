@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Vault Catcher
-// @namespace    https://lzpt.io/
+// @namespace    http://tampermonkey.net/
 // @version      1.2
 // @description  Watches for mistakes when giving members money from faction vault, and blocks requests that are over the user's total money
 // @author       Lazerpent [2112641]
